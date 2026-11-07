@@ -1,0 +1,4 @@
+Options -Indexes
+<FilesMatch "^(README|TESTING|VIVA_GUIDE|SIMPLE_VIVA_GUIDE|UPGRADE|QA_REPORT)\.(md|txt)$">
+    Require all denied
+</FilesMatch>

@@ -1,0 +1,17 @@
+# Private local credentials and secrets
+/config/database.php
+.env
+.env.*
+!.env.example
+
+# Local backups, exported live databases and temporary files
+*backup*.sql
+*dump*.sql
+*.bak
+*.log
+*.tmp
+*.swp
+.DS_Store
+.idea/
+.vscode/
+node_modules/
