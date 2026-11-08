@@ -78,3 +78,7 @@ sh tests/check_source.sh
 These checks cover source syntax and price calculation. Before submission,
 also test phone selection, valuation, admin login, CRUD and history against
 MySQL on your own Ubuntu installation.
+
+## Project Demo
+
+[Watch / Download the PhoneWorth Project Demo](demo-videos/PhoneWorth-Project-Demo.mp4)
