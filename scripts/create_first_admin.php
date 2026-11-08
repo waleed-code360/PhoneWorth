@@ -1,5 +1,5 @@
 <?php
-// First owner account setup. Run ONLY from terminal, never from a browser.
+
 if (PHP_SAPI !== 'cli') {
     http_response_code(403);
     exit("Terminal only.\n");
@@ -23,7 +23,7 @@ if (!defined('PHONEWORTH_OWNER_EMAIL') ||
     exit("Email must match PHONEWORTH_OWNER_EMAIL in config/database.php.\n");
 }
 
-// Hide typed passwords on Unix terminals. Do not pass passwords on the command line.
+
 function hidden_password($label) {
     echo $label;
     if (function_exists('shell_exec')) { shell_exec('stty -echo'); }

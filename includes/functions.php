@@ -1,6 +1,6 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
-    // Cookie is not readable by JavaScript and is limited to this website.
+    
     ini_set('session.use_strict_mode', '1');
     session_set_cookie_params([
         'httponly' => true,
@@ -10,7 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Common security headers for browser responses.
+
 if (PHP_SAPI !== 'cli' && !headers_sent()) {
     header('X-Content-Type-Options: nosniff');
     header('X-Frame-Options: DENY');
@@ -18,7 +18,7 @@ if (PHP_SAPI !== 'cli' && !headers_sent()) {
 }
 
 
-// Escape text before showing it inside HTML.
+
 function e($text) {
     return htmlspecialchars((string) $text, ENT_QUOTES, 'UTF-8');
 }
@@ -51,7 +51,7 @@ function is_admin($pdo = null) {
         return true;
     }
 
-    // A disabled admin or one whose password was reset cannot use an old session.
+    
     $admin = one($pdo,
         "SELECT password_hash FROM users WHERE id=? AND role='admin' AND is_active=1",
         [(int) $_SESSION['admin_id']]
@@ -69,8 +69,8 @@ function require_admin($pdo) {
     }
 }
 
-// Only the admin whose email matches the private config is the owner.
-// This uses the existing users table; no new database columns are needed.
+
+
 function is_owner($pdo) {
     if (empty($_SESSION['admin_id']) || !defined('PHONEWORTH_OWNER_EMAIL')) {
         return false;
@@ -99,7 +99,7 @@ function require_owner($pdo) {
     }
 }
 
-// Small helpers: make invalid form input show a clear message.
+
 function field_text($value, $label, $max = 150) {
     if (!is_string($value)) {
         throw new Exception($label . ' must be text.');
@@ -138,7 +138,7 @@ function money($amount, $currency) {
     return e($currency) . ' ' . number_format((float) $amount, 2);
 }
 
-// All SQL values are passed separately from the SQL statement.
+
 function rows($pdo, $sql, $values = []) {
     $stmt = $pdo->prepare($sql);
     $stmt->execute($values);

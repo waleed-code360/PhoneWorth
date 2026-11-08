@@ -1,6 +1,6 @@
 <?php
-// These two functions keep the Manage Admins page easy to read.
-// Only the project owner can call them from admin/admins.php.
+
+
 
 function add_admin_account($pdo, $nameInput, $emailInput, $password, $confirmation) {
     $name = field_text($nameInput, 'Name', 100);
@@ -30,13 +30,13 @@ function add_admin_account($pdo, $nameInput, $emailInput, $password, $confirmati
         throw new Exception('Passwords do not match.');
     }
 
-    // One email must not be registered twice, even if an account is inactive.
+    
     $existing = one($pdo, 'SELECT id FROM users WHERE email = ?', [$email]);
     if ($existing) {
         throw new Exception('This email already exists. Reactivate the account below if needed.');
     }
 
-    // Never store a plain-text password in MySQL.
+    
     $hash = password_hash($password, PASSWORD_DEFAULT);
 
     execute_sql(
@@ -50,7 +50,7 @@ function add_admin_account($pdo, $nameInput, $emailInput, $password, $confirmati
 function change_admin_status($pdo, $idInput, $loggedInId) {
     $id = field_int($idInput, 'Admin ID');
 
-    // Nobody can disable the account they are currently using.
+    
     if ($id === (int) $loggedInId) {
         throw new Exception('You cannot deactivate your own account.');
     }
@@ -65,7 +65,7 @@ function change_admin_status($pdo, $idInput, $loggedInId) {
         throw new Exception('Admin account not found.');
     }
 
-    // The owner's account is always protected.
+    
     if (
         defined('PHONEWORTH_OWNER_EMAIL') &&
         strcasecmp($target['email'], PHONEWORTH_OWNER_EMAIL) === 0
@@ -73,7 +73,7 @@ function change_admin_status($pdo, $idInput, $loggedInId) {
         throw new Exception('The project owner cannot be deactivated.');
     }
 
-    // 1 means active and 0 means inactive.
+    
     $newStatus = (int) $target['is_active'] === 1 ? 0 : 1;
 
     execute_sql(
@@ -85,7 +85,7 @@ function change_admin_status($pdo, $idInput, $loggedInId) {
     return $newStatus;
 }
 
-// Only the owner can reset ANOTHER admin's password. No public reset form.
+
 function reset_admin_password($pdo, $idInput, $loggedInId, $password, $confirmation) {
     $id = field_int($idInput, 'Admin ID');
     if ($id === (int) $loggedInId) {

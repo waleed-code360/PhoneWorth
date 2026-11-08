@@ -1,5 +1,5 @@
 <?php
-// PhoneWorth homepage. Only basic HTML inside this PHP file.
+
 require_once __DIR__ . '/../includes/layout.php';
 site_header('Home');
 ?>

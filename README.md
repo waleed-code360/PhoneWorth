@@ -82,5 +82,3 @@ MySQL on your own Ubuntu installation.
 ## Project Demo
 
 [Watch / Download the PhoneWorth Project Demo](demo-videos/PhoneWorth-Project-Demo.mp4)
-
-

@@ -1,5 +1,5 @@
--- PHONEWORTH DEMO DATA - ALL PRICES BELOW ARE INVENTED FOR TESTING.
--- NOT VERIFIED, NOT REAL SELLING PRICES. Replace before any client deployment.
+
+
 USE phoneworth;
 
 INSERT INTO countries (id, country_name, iso_code, currency_code, currency_symbol, estimate_range_percent) VALUES (1, 'Pakistan', 'PK', 'PKR', 'Rs.', 5);
@@ -667,4 +667,4 @@ INSERT INTO condition_options (id, question_id, option_text, rule_type, percenta
 INSERT INTO condition_options (id, question_id, option_text, rule_type, percentage_value, part_cost_percent, part_type_id, cost_kind, fallback_percent, score_penalty, needs_note, blocks_valuation, market_type, sort_order) VALUES (56, 19, 'Below 80%', 'part_cost', 0, 80, 3, 'replacement', 9, 15, 1, 0, NULL, 3);
 INSERT INTO condition_options (id, question_id, option_text, rule_type, percentage_value, part_cost_percent, part_type_id, cost_kind, fallback_percent, score_penalty, needs_note, blocks_valuation, market_type, sort_order) VALUES (57, 19, 'Cannot check', 'none', 0, 0, NULL, NULL, 0, 0, 1, 0, NULL, 4);
 
--- Demo data finished. All numeric values above are placeholders, not market facts.
+

@@ -1,5 +1,5 @@
-/* PhoneWorth styles */
-/* Main theme colors */
+
+
 :root {
   --blue: #2459c6;
   --dark: #20324c;
@@ -7,7 +7,7 @@
   --gray: #637084;
 }
 
-/* 1. General page styles */
+
 * {
   box-sizing: border-box;
 }
@@ -70,7 +70,7 @@ button {
   max-width: 660px;
 }
 
-/* 2. Header, navigation and footer */
+
 .notice-bar {
   padding: 7px 12px;
   background: #e8eefb;
@@ -120,7 +120,7 @@ button {
   font-size: 13px;
 }
 
-/* 3. Homepage */
+
 .hero {
   background: #e9f0ff;
   padding: 75px 0;
@@ -200,7 +200,7 @@ button {
   padding: 8px 12px;
 }
 
-/* 4. Common cards and forms */
+
 .content-page {
   padding-top: 45px;
   padding-bottom: 20px;
@@ -291,7 +291,7 @@ button {
   font-size: 20px;
 }
 
-/* 5. Questionnaire */
+
 .selected-phone {
   padding: 14px;
   background: #f1f5ff;
@@ -381,7 +381,7 @@ button {
   display: none !important;
 }
 
-/* 6. Result page */
+
 .result-grid {
   display: grid;
   grid-template-columns: 1fr 260px;
@@ -477,7 +477,7 @@ button {
   background: #fff4df;
 }
 
-/* 7. Admin pages: simple link bar and forms */
+
 .admin-content {
   padding-top: 35px;
 }
@@ -606,7 +606,7 @@ button {
   outline-offset: 2px;
 }
 
-/* 8. Mobile view: one easy media query */
+
 @media (max-width: 700px) {
 .container {
   width: 94%;
@@ -635,13 +635,13 @@ button {
 }
 }
 
-/* The phone selection and question forms stay in one readable column. */
+
 .form-layout {
   display: block;
   max-width: 780px;
 }
 
-/* Question mode buttons: basic Flexbox, no frameworks. */
+
 .mode-nav {
   display: flex;
   flex-wrap: wrap;
@@ -649,7 +649,7 @@ button {
   margin: 0 0 18px;
 }
 
-/* Clearly distinguish permanent deletion from editing and disabling. */
+
 .delete-button {
     color: #a33131;
     border-color: #e7bebe;
@@ -658,7 +658,7 @@ button {
   background: #fff3f3;
 }
 
-/* Admin forms and help use ordinary HTML details, no extra JavaScript. */
+
 .form-details summary, .help-details summary {
   font-weight: bold;
   font-size: 17px;

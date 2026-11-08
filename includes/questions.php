@@ -1,5 +1,5 @@
 <?php
-// Read the questions which match the chosen country, brand and model.
+
 function questions_for_phone($pdo, $countryId, $brandId, $modelId) {
     $questions = rows($pdo,
         'SELECT * FROM condition_questions
@@ -40,8 +40,8 @@ function selected_device($pdo, $countryId, $variantId) {
     );
 }
 
-// Quick Check asks one question from each main condition area.
-// It uses the same MySQL questions and prices as Detailed Check.
+
+
 function questions_for_mode($questions, $mode) {
     if ($mode === 'detailed') {
         return $questions;

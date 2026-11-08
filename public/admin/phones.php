@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if ($action === 'delete') {
-            // Historical valuations and linked records must never be erased.
+            
             if ($section === 'brands') {
                 $checks = [
                     'SELECT COUNT(*) AS total FROM phone_models WHERE brand_id=?',

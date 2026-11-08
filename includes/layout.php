@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/functions.php';
 
-// The same header and footer are used on every public page.
+
 function site_header($title = 'Home', $admin = false) {
     $path = $admin ? '../' : '';
     ?>

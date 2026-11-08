@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
                     if ($brand && (int)$selectedModel['brand_id'] !== $brand) {
                         throw new Exception('Selected model does not belong to the chosen brand.');
                     }
-                    // If only a model was selected, still limit it to that model.
+                    
                 }
                 if ($id) execute_sql($pdo,
                     'UPDATE condition_questions

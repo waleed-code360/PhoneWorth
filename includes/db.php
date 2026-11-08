@@ -10,8 +10,8 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    // MySQL stores TIMESTAMP values in UTC internally.
-    // Read and write timestamps in Pakistan Standard Time (UTC+05:00).
+    
+    
     $pdo->exec("SET time_zone = '+05:00'");
     date_default_timezone_set('Asia/Karachi');
 } catch (PDOException $error) {

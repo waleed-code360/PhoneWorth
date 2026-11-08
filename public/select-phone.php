@@ -1,5 +1,5 @@
 <?php
-// Step 1. Get the lists from MySQL, then let simple JavaScript filter them.
+
 require_once __DIR__ . '/../includes/layout.php';
 require_once __DIR__ . '/../includes/db.php';
 
@@ -15,7 +15,7 @@ $allCountries = rows($pdo,
        )
      ORDER BY c.country_name, c.id"
 );
-// When an imported database contains duplicate country names, prefer PK for Pakistan.
+
 $countries = [];
 $seenCountries = [];
 foreach ($allCountries as $countryRow) {
@@ -47,7 +47,7 @@ $variants = rows(
         ORDER BY v.storage_gb'
 );
 
-// Only show variants which have a relevant local market price.
+
 $prices = rows($pdo,
     "SELECT DISTINCT p.country_id, p.variant_id
      FROM market_prices p
@@ -106,7 +106,7 @@ site_header('Choose Phone');
     </div>
   </div>
 </main>
-<!-- PHP sends data to JavaScript here. We do not hard-code phone names in JS. -->
+
 <script type="application/json" id="phone-data">
   <?= json_encode($data, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>
 </script>

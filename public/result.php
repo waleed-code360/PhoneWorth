@@ -27,14 +27,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $device['model_id']
         );
         $questions = questions_for_mode($allQuestions, $mode);
-        // Only these question IDs and options are allowed (server-side check below).
+        
         $postedAnswers = $_POST['answers'] ?? [];
         $postedNotes = $_POST['notes'] ?? [];
         $chosen = [];
         $marketType = 'standard';
 
         if ($error) {
-            // The submission was too fast; do not insert another estimate.
+            
         } elseif (!$questions) {
             $error = 'The questionnaire is not available yet. Please contact the administrator.';
         } elseif (!is_array($postedAnswers) || !is_array($postedNotes) || count($postedAnswers) > 100 || count($postedNotes) > 100) {
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $error = 'Each comment must be 500 characters or fewer.';
                     break;
                 }
-                // Ignore hidden or irrelevant notes even if a form is manually changed.
+                
                 if (!(int) $matched['needs_note']) {
                     $note = '';
                 }
@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (!$error && !$hold) {
-            // Pakistan always uses PTA-specific base prices, never a silent standard fallback.
+            
             if ($device['iso_code'] === 'PK' && !in_array($marketType, ['pta_approved','non_pta'], true)) {
                 $error = 'Please select a valid PTA registration status.';
             } elseif ($device['iso_code'] !== 'PK' && $marketType !== 'standard') {

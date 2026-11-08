@@ -1,5 +1,5 @@
-// Country -> Brand -> Model -> Variant. Only basic loops and if statements.
-// PHP sends the MySQL lists as JSON at the bottom of select-phone.php.
+
+
 var data = JSON.parse(document.getElementById('phone-data').textContent);
 var country = document.getElementById('country');
 var currency = document.getElementById('currency');

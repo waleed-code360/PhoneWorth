@@ -1,5 +1,4 @@
 #!/bin/sh
-# Basic offline checks: no database connection needed.
 set -eu
 root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 find "$root/public" "$root/includes" "$root/scripts" -type f -name '*.php' -print | while IFS= read -r f; do

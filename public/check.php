@@ -5,14 +5,14 @@ require_once __DIR__ . '/../includes/questions.php';
 
 $countryId = filter_var($_GET['country_id'] ?? null, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]) ?: 0;
 $variantId = filter_var($_GET['variant_id'] ?? null, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]) ?: 0;
-// Quick Check is the default. Detailed Check keeps all applicable questions.
+
 $mode = ($_GET['mode'] ?? 'quick') === 'detailed' ? 'detailed' : 'quick';
 $device = selected_device($pdo, $countryId, $variantId);
 if (!$device) {
     go('select-phone.php');
 }
 
-// The market categories depend on the country. Values still go through a prepared query.
+
 $typeOne = $device['iso_code'] === 'PK' ? 'pta_approved' : 'standard';
 $typeTwo = $device['iso_code'] === 'PK' ? 'non_pta' : 'standard';
 $hasPrice = one($pdo,

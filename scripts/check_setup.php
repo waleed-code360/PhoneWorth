@@ -1,5 +1,5 @@
 <?php
-// Terminal-only, read-only setup check. Never upload this as a public PHP page.
+
 if (PHP_SAPI !== 'cli') {
     http_response_code(403);
     exit("Terminal only.\n");
@@ -12,7 +12,7 @@ $tables = [
 ];
 echo "PhoneWorth database checks\n";
 foreach ($tables as $table) {
-    // Only hard-coded trusted table names, never client input.
+    
     $stmt = $pdo->query("SELECT COUNT(*) FROM `" . $table . "`");
     echo str_pad($table, 22) . $stmt->fetchColumn() . " rows\n";
 }

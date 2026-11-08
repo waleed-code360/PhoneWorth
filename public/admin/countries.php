@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
             if (!preg_match('/^[A-Z]{2}$/', $iso) || !preg_match('/^[A-Z]{3}$/', $currency)) {
                 throw new Exception('Use two letters for ISO and three letters for currency.');
             }
-            // The schema already prevents duplicate ISO codes, but not duplicate names.
+            
             $duplicate = one($pdo,
                 'SELECT id FROM countries WHERE LOWER(TRIM(country_name))=LOWER(TRIM(?)) AND id<>? LIMIT 1',
                 [$name, $id]

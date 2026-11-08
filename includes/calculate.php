@@ -1,10 +1,10 @@
 <?php
-// This file contains the PRICE MATH. It does not connect to MySQL.
-// All prices and rules are given to it as arrays from result.php.
+
+
 
 function calculate_price($basePrice, $rangePercent, $answers, $partPrices) {
-    $highestDeduction = []; // Largest price deduction in each damage group.
-    $highestScore = [];     // Largest score penalty in each damage group.
+    $highestDeduction = []; 
+    $highestScore = [];     
     $fallbackUsed = false;
 
     foreach ($answers as $key => $answer) {
@@ -17,7 +17,7 @@ function calculate_price($basePrice, $rangePercent, $answers, $partPrices) {
 
         if ($rule === 'part_cost') {
             $partId = (int) $answer['part_type_id'];
-            $kind = $answer['cost_kind']; // repair or replacement
+            $kind = $answer['cost_kind']; 
             $cost = $partPrices[$partId][$kind . '_cost'] ?? null;
 
             if ($cost !== null) {

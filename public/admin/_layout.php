@@ -1,5 +1,5 @@
 <?php
-// Very simple admin layout: header, navigation links, content, footer.
+
 function admin_header($title, $active) {
     site_header($title, true);
     $pages = [
@@ -72,7 +72,7 @@ function admin_header($title, $active) {
       <?php
       }
 
-      // Keep admin tables short: 20 rows per page, with plain Previous/Next links.
+      
       function admin_pages($page, $hasNext, $filters = []) {
           echo '<div class="page-links">';
           if ($page > 1) {

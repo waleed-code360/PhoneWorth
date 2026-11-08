@@ -1,6 +1,6 @@
-// PhoneWorth questionnaire: plain JavaScript only.
-// 1. Show optional comments for answers that need details.
-// 2. Show one group of questions at a time to make the page easier.
+
+
+
 var cards = document.querySelectorAll('.question-card');
 for (var i = 0; i < cards.length; i++) {
     var radios = cards[i].querySelectorAll('input[type="radio"]');
@@ -41,7 +41,7 @@ function showStep(number) {
     wizardError.hidden = true;
 }
 
-// Find the first unanswered question in the chosen section.
+
 function missingAnswer(section) {
     var questions = section.querySelectorAll('.question-card');
     for (var i = 0; i < questions.length; i++) {

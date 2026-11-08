@@ -3,7 +3,7 @@ require_once __DIR__ . '/_start.php';
 require_once __DIR__ . '/_layout.php';
 require_once __DIR__ . '/../../includes/admin_management.php';
 
-// Ordinary admins must not view this page or submit its forms.
+
 require_owner($pdo);
 
 $error = '';
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             throw new Exception('Unknown action.');
         }
 
-        // A redirect prevents the form from being sent again on refresh.
+        
         go('admins.php');
     } catch (PDOException $exception) {
         $error = 'Could not save. Please check the email and try again.';

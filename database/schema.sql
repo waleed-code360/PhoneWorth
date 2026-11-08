@@ -1,11 +1,11 @@
--- PhoneWorth tables. Import on a fresh MySQL database.
--- Base prices and deduction rates are stored in MySQL.
+
+
 
 CREATE DATABASE IF NOT EXISTS phoneworth
   CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE phoneworth;
 
--- 1. Users: admin login; regular user accounts are optional in the MVP.
+
 CREATE TABLE IF NOT EXISTS users (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -16,14 +16,14 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- 2. Brands: e.g. Apple, Samsung, Tecno.
+
 CREATE TABLE IF NOT EXISTS brands (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     brand_name VARCHAR(100) NOT NULL UNIQUE,
     is_active TINYINT(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB;
 
--- 3. Models: many models belong to one brand.
+
 CREATE TABLE IF NOT EXISTS phone_models (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     brand_id INT UNSIGNED NOT NULL,
@@ -34,8 +34,8 @@ CREATE TABLE IF NOT EXISTS phone_models (
         REFERENCES brands(id) ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
--- 4. Variants: RAM and storage combinations for a model.
--- ram_gb = 0 means RAM was not specified in the catalogue.
+
+
 CREATE TABLE IF NOT EXISTS phone_variants (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     model_id INT UNSIGNED NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS phone_variants (
         REFERENCES phone_models(id) ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
--- 5. Countries: local currency and a configurable display-range percentage.
+
 CREATE TABLE IF NOT EXISTS countries (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     country_name VARCHAR(100) NOT NULL,
@@ -59,9 +59,9 @@ CREATE TABLE IF NOT EXISTS countries (
     CONSTRAINT chk_country_range CHECK (estimate_range_percent BETWEEN 0 AND 100)
 ) ENGINE=InnoDB;
 
--- 6. Market prices: local GOOD-CONDITION used base prices, not new-phone MSRP.
--- market_type examples: 'standard', 'pta_approved', 'non_pta'.
--- Admin and PHP must agree on the exact market_type values.
+
+
+
 CREATE TABLE IF NOT EXISTS market_prices (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     variant_id INT UNSIGNED NOT NULL,
@@ -78,15 +78,15 @@ CREATE TABLE IF NOT EXISTS market_prices (
     CONSTRAINT chk_market_price CHECK (base_price > 0)
 ) ENGINE=InnoDB;
 
--- 7. Part types: screen, battery, rear camera, charging port, etc.
+
 CREATE TABLE IF NOT EXISTS part_types (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     part_name VARCHAR(100) NOT NULL UNIQUE,
     is_active TINYINT(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB;
 
--- 8. Model/country-specific repair and replacement costs.
--- We deliberately do NOT convert costs from Pakistan into US prices.
+
+
 CREATE TABLE IF NOT EXISTS model_part_prices (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     model_id INT UNSIGNED NOT NULL,
@@ -112,8 +112,8 @@ CREATE TABLE IF NOT EXISTS model_part_prices (
     )
 ) ENGINE=InnoDB;
 
--- 9. Questions: null country/brand/model = all; otherwise filter by selection.
--- damage_group: related faults, e.g. 'screen' + 'touch', count only worst one.
+
+
 CREATE TABLE IF NOT EXISTS condition_questions (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     question_text VARCHAR(255) NOT NULL,
@@ -133,12 +133,12 @@ CREATE TABLE IF NOT EXISTS condition_questions (
         REFERENCES phone_models(id) ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
--- 10. Answer options and pricing rules.
--- rule_type='percentage': percentage_value % of base used price.
--- rule_type='part_cost': part_cost_percent % of selected local part cost.
--- If local part cost is absent, use fallback_percent % of base price.
--- rule_type='none': neutral answer, market selector, or blocking answer.
--- market_type applies to a selected status (e.g. PTA approved) instead of a deduction.
+
+
+
+
+
+
 CREATE TABLE IF NOT EXISTS condition_options (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     question_id INT UNSIGNED NOT NULL,
@@ -171,8 +171,8 @@ CREATE TABLE IF NOT EXISTS condition_options (
     )
 ) ENGINE=InnoDB;
 
--- 11. Valuation snapshots. Historical results do not change after admin edits prices.
--- Guests are supported with user_id=NULL.
+
+
 CREATE TABLE IF NOT EXISTS valuations (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id INT UNSIGNED NULL,
@@ -202,8 +202,8 @@ CREATE TABLE IF NOT EXISTS valuations (
     )
 ) ENGINE=InnoDB;
 
--- 12. Selected answers, with a snapshot of displayed text and applied deduction.
--- One selected answer per question within a single valuation.
+
+
 CREATE TABLE IF NOT EXISTS valuation_answers (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     valuation_id INT UNSIGNED NOT NULL,
@@ -211,8 +211,8 @@ CREATE TABLE IF NOT EXISTS valuation_answers (
     option_id INT UNSIGNED NOT NULL,
     question_text_snapshot VARCHAR(255) NOT NULL,
     option_text_snapshot VARCHAR(150) NOT NULL,
-    -- Optional free-text details for this specific question (max 500 characters).
-    -- Never interpreted automatically as a pricing rule.
+    
+    
     user_note VARCHAR(500) NULL,
     applied_deduction DECIMAL(12,2) NOT NULL DEFAULT 0.00,
     score_penalty_applied TINYINT UNSIGNED NOT NULL DEFAULT 0,
@@ -228,5 +228,5 @@ CREATE TABLE IF NOT EXISTS valuation_answers (
     )
 ) ENGINE=InnoDB;
 
--- END OF SCHEMA
--- See demo_data.sql for DEMO ONLY values. Replace with researched market references before real use.
+
+
